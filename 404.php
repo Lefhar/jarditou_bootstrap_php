@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 define("title","Nos produit");
 define("description","Notre gamme de produit");
 include('header.php');?>
