@@ -1,3 +1,6 @@
 .imgtd{
     width: 100px;
  }
+ .table-striped-warning tbody tr:nth-of-type(odd) {
+    background-color:#ffc107;
+}
