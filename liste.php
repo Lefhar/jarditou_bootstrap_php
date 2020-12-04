@@ -59,7 +59,7 @@ include_once('db.php');
               <th scope="col">Libellé</th><!--titre colonne 4-->
               <th scope="col">Prix</th><!--titre colonne 5-->
               <th scope="col">Couleur</th><!--titre colonne 6-->
-              <th scope="col">Modifier</th><!--titre colonne 7-->
+              <th scope="col">Détail</th><!--titre colonne 7-->
             </tr>
             </thead>
             <tbody>
@@ -101,7 +101,7 @@ else
         <td>'.$row['pro_libelle'].'</td>
         <td>'.$row['pro_prix'].'&euro;</td>
         <td>'.$row['pro_couleur'].'</td>
-        <td> <a href="detail.php?pro_id='.$row['pro_id'].'" title="modifier" alt="modifier">Modifier</a></td>
+        <td> <a href="detail.php?pro_id='.$row['pro_id'].'" title="Voir" alt="Voir">Voir</a></td>
       </tr>';
 
     }
