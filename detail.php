@@ -5,7 +5,7 @@
     <?php 
     include_once('db.php');
     $pro_id = $_GET['pro_id'];
-    $query = $db->prepare("SELECT pro_id, cat_nom , cat_id, pro_libelle, pro_prix, pro_couleur FROM produits join categories on cat_id = pro_cat_id WHERE pro_id = :pro_id ORDER BY pro_libelle");
+    $query = $db->prepare("SELECT pro_id, cat_nom , cat_id, pro_libelle, pro_prix, pro_couleur, pro_photo FROM produits join categories on cat_id = pro_cat_id WHERE pro_id = :pro_id ORDER BY pro_libelle");
     $query->bindParam(":pro_id", $pro_id);
     $query->execute();
     $row = $query->fetch(PDO::FETCH_ASSOC);
@@ -54,7 +54,7 @@ include('header.php');?>
      <label for="pro_img" class="col-sm-2 col-form-label col-12">Image </label>
 
 <div class="col-sm-10 col-12"> 
-     <input type="text" class="form-control" id="pro_img"  named="pro_img"  value="<?php echo $row['pro_id'];?>.jpg"> <br>
+     <input type="text" class="form-control" id="pro_img"  named="pro_img"  value="<?php echo $row['pro_id'];?>.<?php echo $row['pro_photo'];?>"> <br>
      </div>
      </div>   
 

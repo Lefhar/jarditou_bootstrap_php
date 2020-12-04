@@ -34,14 +34,15 @@ include_once('db.php');
             </tr>
             </thead>
             <tbody>
-            <?php     $query = $db->prepare('SELECT pro_id, cat_nom , pro_libelle, pro_prix, pro_couleur FROM produits join categories on cat_id = pro_cat_id WHERE pro_stock > :pro_stock ORDER BY pro_libelle');
+
+            
+            <?php     $query = $db->prepare('SELECT pro_id, cat_nom , pro_libelle, pro_prix, pro_couleur, pro_photo FROM produits join categories on cat_id = pro_cat_id WHERE pro_stock > :pro_stock ORDER BY pro_libelle');
     $query->execute(array('pro_stock' => '0'));
-    // alternatively you could use PDOStatement::fetchAll() and get rid of the loop
-    // this is dependent upon the design of your app
-    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+   
+    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {//notre boucle while pour afficher tout les produit
 
        echo ' <tr  class="table-striped-warning">
-        <td ><img width="100" src="src/img/'.$row['pro_id'].'.jpg" alt="'.$row['cat_nom'].' '.$row['pro_libelle'].'"  title="'.$row['cat_nom'].' '.$row['pro_libelle'].'" class="img-fluid" /></td>
+        <td ><img width="100" src="src/img/'.$row['pro_id'].'.'.$row['pro_photo'].'" alt="'.$row['cat_nom'].' '.$row['pro_libelle'].'"  title="'.$row['cat_nom'].' '.$row['pro_libelle'].'" class="img-fluid" /></td>
         <td>'.$row['pro_id'].'</td>
         <td>'.$row['cat_nom'].'</td>
         <td>'.$row['pro_libelle'].'</td>
