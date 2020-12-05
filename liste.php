@@ -55,11 +55,11 @@ include_once('db.php');
               <th  scope="col">Photo</th><!--titre colonne 1-->
               <th scope="col" >Id</th><!--colonne 2-->
               <th scope="col">Catégorie</th><!--titre colonne 3-->
-              <th scope="col">Ref</th>
-              <th scope="col">Libellé</th><!--titre colonne 4-->
-              <th scope="col">Prix</th><!--titre colonne 5-->
-              <th scope="col">Couleur</th><!--titre colonne 6-->
-              <th scope="col">Détail</th><!--titre colonne 7-->
+              <th scope="col">Ref</th><!--titre colonne 4-->
+              <th scope="col">Libellé</th><!--titre colonne 5-->
+              <th scope="col">Prix</th><!--titre colonne 6-->
+              <th scope="col">Couleur</th><!--titre colonne 7-->
+              <th scope="col">Détail</th><!--titre colonne 8-->
             </tr>
             </thead>
             <tbody>
@@ -92,19 +92,19 @@ else
     $zero = 0;
     $query->bindParam(':pro_stock', $zero); //paramètre 
     $query->execute();//execution
-    while ($row = $query->fetch(PDO::FETCH_ASSOC)) //notre boucle while pour afficher tout les produit
+    while ($row = $query->fetch(PDO::FETCH_ASSOC)) //notre boucle while pour afficher tout les produits
     {
 
-       echo ' <tr  class="table-striped-warning">
-        <td ><img width="100" src="src/img/'.$row['pro_id'].'.'.$row['pro_photo'].'" alt="'.$row['cat_nom'].' '.$row['pro_libelle'].'"  title="'.$row['cat_nom'].' '.$row['pro_libelle'].'" class="img-fluid" /></td>
-        <td>'.$row['pro_id'].'</td>
-        <td>'.$row['cat_nom'].'</td>
-        <td>'.$row['pro_ref'].'</td>
-        <td>'.$row['pro_libelle'].'</td>
-        <td>'.$row['pro_prix'].'&euro;</td>
-        <td>'.$row['pro_couleur'].'</td>
-        <td> <a href="detail.php?pro_id='.$row['pro_id'].'" title="Voir" alt="Voir">Voir</a></td>
-      </tr>';
+       echo '<tr  class="table-striped-warning">
+              <td ><img width="100" src="src/img/'.$row['pro_id'].'.'.$row['pro_photo'].'" alt="'.$row['cat_nom'].' '.$row['pro_libelle'].'"  title="'.$row['cat_nom'].' '.$row['pro_libelle'].'" class="img-fluid" /></td>
+              <td>'.$row['pro_id'].'</td>
+              <td>'.$row['cat_nom'].'</td>
+              <td>'.$row['pro_ref'].'</td>
+              <td>'.$row['pro_libelle'].'</td>
+              <td>'.$row['pro_prix'].'&euro;</td>
+              <td>'.$row['pro_couleur'].'</td>
+              <td> <a href="detail.php?pro_id='.$row['pro_id'].'" title="Voir" alt="Voir">Voir</a></td>
+            </tr>';
 
     }
         ?>
