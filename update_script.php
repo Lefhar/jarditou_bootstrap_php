@@ -28,7 +28,7 @@ is_numeric($_POST['cat_id']))
     {
 
       //requete sql
-        $sql = 'UPDATE produits SET pro_cat_id =:pro_cat_id, pro_libelle =:pro_libelle, pro_prix =:pro_prix, pro_stock=:pro_stock, pro_couleur =:pro_couleur, pro_photo =:pro_photo, pro_description =:pro_description, pro_d_modif=:pro_d_modif WHERE pro_id =:pro_id';
+        $sql = 'INSERT INTO produits (pro_cat_id, pro_libelle, pro_prix, pro_stock, pro_couleur, pro_photo, pro_description, pro_d_ajout) :pro_cat_id, :pro_libelle, :pro_prix, :pro_stock, :pro_couleur, :pro_photo, :pro_description, :pro_d_ajout';
     
         $query = $db->prepare($sql);//on prepare
 
@@ -52,15 +52,14 @@ is_numeric($_POST['cat_id']))
         $query->bindValue(":pro_couleur", $pro_couleur);
         $query->bindValue(":pro_photo", $pro_photo);
         $query->bindValue(":pro_description", $pro_description);
-        $query->bindValue(":pro_d_modif", $pro_d_modif);
-        $query->bindValue(":pro_id", $id);
+        $query->bindValue(":pro_d_ajout", $pro_d_modif);
 
         $success= $query->execute();//Exécution de la requête 
         $query->closeCursor();//on libére la mémoire
      
         if($success)
         {
-        header("Location: detail.php?pro_id=".$row['pro_id']);// si ya bien requéte on fait la redirection sur le produit
+        header("Location: index.php");// si ya bien requéte on fait la redirection sur le produit
         exit();
         }
       
@@ -76,7 +75,9 @@ is_numeric($_POST['cat_id']))
             die("Fin du script");
       } 
 
-}else{
+}
+else
+{
   header("Location: update_form.php?pro_id=".$row['pro_id']."&e=1");// si ya une erreur on renvoi avec le get e numéro 1
 }
 ?>
