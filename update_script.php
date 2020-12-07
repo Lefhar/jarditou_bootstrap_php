@@ -1,4 +1,5 @@
 <?php
+//pour afficher les erreurs php
 ini_set('display_errors', 1); 
 error_reporting(E_ALL);  
 include("db.php");
@@ -16,6 +17,7 @@ if(empty($row['pro_id']))//si sa retourne une erreur on renvoi sur l'erreur 404.
    exit();
 }
 
+//on vérifie les valeurs entré le nombre de caractére et pour les valeur numérique aussi exemple pro_stock, pro_prix etc
 if(!empty($_POST['pro_libelle'])&&strlen($_POST['pro_libelle'])<=200&&!empty($_POST['pro_stock'])&&strlen($_POST['pro_stock'])<=200
 &&!empty($_POST['pro_couleur'])&&strlen($_POST['pro_couleur'])<=30&&!empty($_POST['pro_description'])&&strlen($_POST['pro_description'])<=1000&&
 !empty($_POST['pro_img'])&&!empty($_POST['pro_prix'])&&is_numeric($_POST['pro_prix'])&&!empty($_POST['cat_id'])&&
@@ -73,6 +75,7 @@ is_numeric($_POST['cat_id']))
             echo "N° : " . $e->getCode();
             die("Fin du script");
       } 
+
 }else{
   header("Location: update_form.php?pro_id=".$row['pro_id']."&e=1");// si ya une erreur on renvoi avec le get e numéro 1
 }
