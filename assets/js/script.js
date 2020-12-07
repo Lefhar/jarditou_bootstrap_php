@@ -202,3 +202,41 @@ function verif()
             return false;
         }
 }
+
+function limitingData(oEvent) {
+  if(isNaN(this.dataset.maxlength) == false){ 
+    let oDiv =  document.getElementById(this.name+"Error");
+    if(oDiv){
+      let oCnt =  oDiv.children[0], 
+          iLongueur = this.value.length,
+          iLimit = parseInt(this.dataset.maxlength);  
+      if(iLimit - iLongueur < 0) {
+        oCnt.classList.add("warning");
+        document.getElementById(this.name).className = "form-control is-invalid";
+
+        document.getElementById(this.name).value =  document.getElementById(this.name).value.substring(0, iLimit);
+        //A vous d'adapter le message 
+        oCnt.textContent = iLimit - iLongueur ;
+      }else{
+        oCnt.classList.remove("warning");
+        document.getElementById(this.name).className = "form-control is-valid";
+        //A vous d'adapter le message 
+        oCnt.textContent = iLongueur ;
+      }
+    }//if
+  }//if
+}//fct
+
+
+document.addEventListener('DOMContentLoaded',function(){
+  let aTextarea = document.getElementsByTagName('textarea');
+  for(let oTextarea of aTextarea){
+    if(oTextarea.maxLength != -1 && oTextarea.dataset.maxlength == null){
+      //Avec un attribut maxlength
+      oTextarea.addEventListener('input',limiting);
+    }else if(oTextarea.maxLength == -1 && oTextarea.dataset.maxlength != null){
+      //Sans limite bloquante
+      oTextarea.addEventListener('input',limitingData); 
+    }
+  }
+});
