@@ -20,11 +20,7 @@ include_once('db.php');
       <div class="col-12">
       <article>
                 <h2>Nos produits</h2>
-                <div class="table-responsive">
-                <table class="table table-sm table-striped table-striped-warning table-bordered"><!--début du tableau-->
-                
-                
-                <div class="dropdown">
+                <div class="dropdown m-2">
           <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Trier par
           </button>
@@ -46,7 +42,13 @@ include_once('db.php');
               </ul>
             </li>
          </ul>
+         <a class="btn btn-success float-right" href="add_form.php">Ajouter un produit</a>
         </div>
+                
+                <div class="table-responsive">
+                <table class="table table-sm table-striped table-striped-warning table-bordered"><!--début du tableau-->
+                
+                
                 
                 
                 
@@ -59,7 +61,6 @@ include_once('db.php');
               <th scope="col">Libellé</th><!--titre colonne 5-->
               <th scope="col">Prix</th><!--titre colonne 6-->
               <th scope="col">Couleur</th><!--titre colonne 7-->
-              <th scope="col">Détail</th><!--titre colonne 8-->
             </tr>
             </thead>
             <tbody>
@@ -100,13 +101,13 @@ else
               <td>'.$row['pro_id'].'</td>
               <td>'.$row['cat_nom'].'</td>
               <td>'.$row['pro_ref'].'</td>
-              <td>'.$row['pro_libelle'].'</td>
+              <td><a href="detail.php?pro_id='.$row['pro_id'].'" title="détail" alt="détail">'.$row['pro_libelle'].'</a></td>
               <td>'.$row['pro_prix'].'&euro;</td>
               <td>'.$row['pro_couleur'].'</td>
-              <td> <a href="detail.php?pro_id='.$row['pro_id'].'" title="Voir" alt="Voir">Voir</a></td>
             </tr>';
 
     }
+    $query->closeCursor();
         ?>
      
                     </tbody>

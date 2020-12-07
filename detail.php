@@ -39,6 +39,7 @@ include('header.php');?>
     <p class="card-text"><?php echo $row['pro_description'];?></p>
     <p class="card-text">Prix : <?php echo $row['pro_prix'];?>&euro;</p>
     <a href="update_form.php?pro_id=<?php echo $row['pro_id'];?>" class="btn btn-primary">Modifier</a>
+    <?php $query->closeCursor(); ?>
   </div>
 </div>
  
@@ -51,4 +52,5 @@ include('header.php');?>
     <!--
         Footer
     -->
+     
 <?php include('footer.php');?>
