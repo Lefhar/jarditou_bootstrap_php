@@ -21,21 +21,21 @@ is_numeric($_POST['cat_id']))
     {
 
       //requete sql
-        $sql = 'UPDATE produits SET pro_cat_id =:pro_cat_id, pro_libelle =:pro_libelle, pro_prix =:pro_prix, pro_stock=:pro_stock, pro_couleur =:pro_couleur, pro_photo =:pro_photo, pro_description =:pro_description, pro_d_modif=:pro_d_modif WHERE pro_id =:pro_id';
+      $sql = 'INSERT INTO produits (pro_cat_id, pro_libelle, pro_prix, pro_stock, pro_couleur, pro_photo, pro_description, pro_d_ajout) :pro_cat_id, :pro_libelle, :pro_prix, :pro_stock, :pro_couleur, :pro_photo, :pro_description, :pro_d_ajout';
     
-        $query = $db->prepare($sql);//on prepare
+      $query = $db->prepare($sql);//on prepare
 
-        //on récupére les divers champs
-            $id = $row['pro_id'];
-            $cat_id = $_POST['cat_id'];
-            $pro_libelle = $_POST['pro_libelle'];      
-            $pro_prix = $_POST['pro_prix'];      
-            $pro_stock = $_POST['pro_stock'];
-            $pro_couleur = $_POST['pro_couleur'];      
-            $info = new SplFileInfo($_POST['pro_img']);
-            $pro_photo = $info->getExtension(); 
-            $pro_description = $_POST['pro_description'];  
-            $pro_d_modif = date("Y-m-d H:i:s");     
+      //on récupére les divers champs
+          $id = $row['pro_id'];
+          $cat_id = $_POST['cat_id'];
+          $pro_libelle = $_POST['pro_libelle'];      
+          $pro_prix = $_POST['pro_prix'];      
+          $pro_stock = $_POST['pro_stock'];
+          $pro_couleur = $_POST['pro_couleur'];      
+          $info = new SplFileInfo($_POST['pro_img']);
+          $pro_photo = $info->getExtension(); 
+          $pro_description = $_POST['pro_description'];  
+          $pro_d_modif = date("Y-m-d H:i:s");     
 
         // Association des valeurs aux paramètres avec BindValue :
         $query->bindValue(":pro_cat_id", $cat_id);
@@ -45,7 +45,7 @@ is_numeric($_POST['cat_id']))
         $query->bindValue(":pro_couleur", $pro_couleur);
         $query->bindValue(":pro_photo", $pro_photo);
         $query->bindValue(":pro_description", $pro_description);
-        $query->bindValue(":pro_d_modif", $pro_d_modif);
+        $query->bindValue(":pro_d_ajout", $pro_d_modif);
         $query->bindValue(":pro_id", $id);
 
         $success= $query->execute();//Exécution de la requête 

@@ -28,7 +28,7 @@ is_numeric($_POST['cat_id']))
     {
 
       //requete sql
-        $sql = 'INSERT INTO produits (pro_cat_id, pro_libelle, pro_prix, pro_stock, pro_couleur, pro_photo, pro_description, pro_d_ajout) :pro_cat_id, :pro_libelle, :pro_prix, :pro_stock, :pro_couleur, :pro_photo, :pro_description, :pro_d_ajout';
+        $sql = 'UPDATE produits SET pro_cat_id =:pro_cat_id, pro_libelle =:pro_libelle, pro_prix =:pro_prix, pro_stock=:pro_stock, pro_couleur =:pro_couleur, pro_photo =:pro_photo, pro_description =:pro_description, pro_d_modif=:pro_d_modif WHERE pro_id =:pro_id';
     
         $query = $db->prepare($sql);//on prepare
 
@@ -52,7 +52,8 @@ is_numeric($_POST['cat_id']))
         $query->bindValue(":pro_couleur", $pro_couleur);
         $query->bindValue(":pro_photo", $pro_photo);
         $query->bindValue(":pro_description", $pro_description);
-        $query->bindValue(":pro_d_ajout", $pro_d_modif);
+        $query->bindValue(":pro_d_modif", $pro_d_modif);
+        $query->bindValue(":pro_id", $id);
 
         $success= $query->execute();//Exécution de la requête 
         $query->closeCursor();//on libére la mémoire
