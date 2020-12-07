@@ -33,56 +33,51 @@ include('header.php');?>
             <article>
             
        <legend> Modification du produit <?php echo $row['pro_libelle'];?></legend>
-       
+       <?php if(!empty($_GET['e'])){echo error((int)$_GET['e']);}?>
           <form action="update_script.php" method="post" id="modification_produit"  name="modification_produit"   onsubmit="return verifproduit();"> <!--balise form début du formulaire-->
           <fieldset>
              <input type="hidden" id="pro_id"  name="pro_id" value="<?php echo $row['pro_id'];?>"><!--  post de pro_id en input masqué -->
+        
          <div class="form-group row">
-     
         <label for="pro_libelle" class="col-sm-2 col-form-label col-12">Libelle </label>
-
-<div class="col-sm-10 col-12"> 
-        <input type="text" class="form-control" id="pro_libelle"  name="pro_libelle"  value="<?php echo $row['pro_libelle'];?>"> <br>
+        <div class="col-sm-10 col-12"> 
+        <input type="text" class="form-control" id="pro_libelle"  name="pro_libelle"  data-maxlength="200" value="<?php echo $row['pro_libelle'];?>"> <br>
+        <div id="pro_libelleError" class="counter"><span>0</span> caractères (200 max)</div> 
         </div>
         </div>   
 
         <div class="form-group row">
-     
-     <label for="pro_couleur" class="col-sm-2 col-form-label col-12">Couleur </label>
+        <label for="pro_couleur" class="col-sm-2 col-form-label col-12">Couleur </label>
+        <div class="col-sm-10 col-12"> 
+        <input type="text" class="form-control" id="pro_couleur"  name="pro_couleur"   data-maxlength="30" value="<?php echo $row['pro_couleur'];?>"> <br>
+        <div id="pro_couleurError" class="counter"><span>0</span> caractères (30 max)</div> 
+        </div>
+        </div>  
 
-<div class="col-sm-10 col-12"> 
-     <input type="text" class="form-control" id="pro_couleur"  name="pro_couleur"  value="<?php echo $row['pro_couleur'];?>"> <br>
-     </div>
-     </div>   
-     <div class="form-group row">
-     
-     <label for="pro_img" class="col-sm-2 col-form-label col-12">Image </label>
-
-<div class="col-sm-10 col-12"> 
-     <input type="text" class="form-control" id="pro_img"  name="pro_img"  value="<?php echo $row['pro_id'];?>.<?php echo $row['pro_photo'];?>"> <br>
-     </div>
-     </div>   
-
-
-     <div class="form-group row">
-     
-     <label for="pro_prix" class="col-sm-2 col-form-label col-12">Prix </label>
-
-<div class="col-sm-10 col-12"> 
-     <input  type="number"  step="any" class="form-control" id="pro_prix"  name="pro_prix"  value="<?php echo $row['pro_prix'];?>"> <br>
-     </div>
-     </div>   
-     <div class="form-group row">
-     
-     <label for="pro_stock" class="col-sm-2 col-form-label col-12">Stock </label>
-
-<div class="col-sm-10 col-12"> 
-     <input  type="number" class="form-control" id="pro_stock"  name="pro_stock"  value="<?php echo $row['pro_stock'];?>"> <br>
-     </div>
-     </div>   
+        <div class="form-group row">
+        <label for="pro_img" class="col-sm-2 col-form-label col-12">Image </label>
+        <div class="col-sm-10 col-12"> 
+        <input type="text" class="form-control" id="pro_img"  name="pro_img"  value="<?php echo $row['pro_id'];?>.<?php echo $row['pro_photo'];?>"> <br>
+        </div>
+        </div>   
 
 
         <div class="form-group row">
+        <label for="pro_prix" class="col-sm-2 col-form-label col-12">Prix </label>
+        <div class="col-sm-10 col-12"> 
+        <input  type="number"  step="any" class="form-control" id="pro_prix"  name="pro_prix"  value="<?php echo $row['pro_prix'];?>"> <br>
+        </div>
+        </div>   
+
+        <div class="form-group row">
+        <label for="pro_stock" class="col-sm-2 col-form-label col-12">Stock </label>
+        <div class="col-sm-10 col-12"> 
+        <input  type="number" class="form-control" id="pro_stock"  name="pro_stock"  value="<?php echo $row['pro_stock'];?>"> <br>
+        </div>
+        </div>   
+
+
+         <div class="form-group row">
          <label for="cat_id" class="col-sm-2 col-form-label" >Catégorie  </label>
          <div class="col-sm-10 col-12"> 
           <select name="cat_id" id="cat_id" class="form-control">

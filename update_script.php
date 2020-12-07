@@ -74,6 +74,6 @@ is_numeric($_POST['cat_id']))
             die("Fin du script");
       } 
 }else{
-  var_dump($_POST);
+  header("Location: update_form.php?pro_id=".$row['pro_id']."&e=1");// si ya une erreur on renvoi avec le get e numéro 1
 }
 ?>

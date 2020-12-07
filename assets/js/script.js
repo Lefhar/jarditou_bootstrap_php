@@ -213,11 +213,11 @@ function limitingData(oEvent) {
       if(iLimit - iLongueur < 0) {
         oCnt.classList.add("warning");
         document.getElementById(this.name).className = "form-control is-invalid";
-
         document.getElementById(this.name).value =  document.getElementById(this.name).value.substring(0, iLimit);
-        //A vous d'adapter le message 
         oCnt.textContent = iLimit - iLongueur ;
-      }else{
+      }
+      else
+      {
         oCnt.classList.remove("warning");
         document.getElementById(this.name).className = "form-control is-valid";
         //A vous d'adapter le message 
@@ -227,6 +227,19 @@ function limitingData(oEvent) {
   }//if
 }//fct
 
+// pro_libelle et pro_couleur
+document.addEventListener('DOMContentLoaded',function(){
+    let aTextarea = document.getElementsByTagName('input');
+    for(let oTextarea of aTextarea){
+      if(oTextarea.maxLength != -1 && oTextarea.dataset.maxlength == null){
+        //Avec un attribut maxlength
+        oTextarea.addEventListener('input',limiting);
+      }else if(oTextarea.maxLength == -1 && oTextarea.dataset.maxlength != null){
+        //Sans limite bloquante
+        oTextarea.addEventListener('input',limitingData); 
+      }
+    }
+  });
 
 document.addEventListener('DOMContentLoaded',function(){
   let aTextarea = document.getElementsByTagName('textarea');

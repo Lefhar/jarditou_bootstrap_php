@@ -1,3 +1,4 @@
+<?php if(file_exists("function.php")){include("function.php");}?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -50,6 +51,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contact.php">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="accueil.php">A propos</a>
                 </li>
             </ul>
             <!--

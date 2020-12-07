@@ -30,24 +30,26 @@ include('header.php');?>
         <div class="form-group row">
         <label for="pro_ref" class="col-sm-2 col-form-label col-12">Référence </label>
         <div class="col-sm-10 col-12"> 
-        <input type="text" class="form-control" id="pro_ref"  name="pro_ref"> <br>
-        </div>
-        </div>   
-        <div class="form-group row">
-     
-        <label for="pro_libelle" class="col-sm-2 col-form-label col-12">Libelle </label>
-        <div class="col-sm-10 col-12"> 
-        <input type="text" class="form-control" id="pro_libelle"  name="pro_libelle"> <br>
+        <input type="text" class="form-control" id="pro_ref"  name="pro_ref"   data-maxlength="10"   placeholder="Référence (10 caractères MAX)"> <br>
+        <div id="pro_refError" class="counter"><span>0</span> caractères (10 max)</div> 
         </div>
         </div>  
 
         <div class="form-group row">
-        <label for="pro_couleur" class="col-sm-2 col-form-label col-12">Couleur </label>
+        <label for="pro_libelle" class="col-sm-2 col-form-label col-12">Libelle </label>
         <div class="col-sm-10 col-12"> 
-        <input type="text" class="form-control" id="pro_couleur"  name="pro_couleur"> <br>
+        <input type="text" class="form-control" id="pro_libelle"  name="pro_libelle"  data-maxlength="200"   placeholder="Libelle (200 caractères MAX)"> <br>
+        <div id="pro_libelleError" class="counter"><span>0</span> caractères (200 max)</div> 
         </div>
         </div>   
 
+        <div class="form-group row">
+        <label for="pro_couleur" class="col-sm-2 col-form-label col-12">Couleur </label>
+        <div class="col-sm-10 col-12"> 
+        <input type="text" class="form-control" id="pro_couleur"  name="pro_couleur"   data-maxlength="30"  placeholder="Couleur (30 caractères MAX)"> <br>
+        <div id="pro_couleurError" class="counter"><span>0</span> caractères (30 max)</div> 
+        </div>
+        </div>  
 
         <div class="form-group row">
         <label for="pro_img" class="col-sm-2 col-form-label col-12">Image </label>

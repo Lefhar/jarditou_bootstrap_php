@@ -4,7 +4,7 @@ if(file_exists($file))
 {
     switch($file){
         case 'index.php';
-        include('accueil.php');
+        include('liste.php');
     break;
     default :
         include($file);
