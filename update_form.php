@@ -34,7 +34,7 @@ include('header.php');?>
             
        <legend> Modification du produit <?php echo $row['pro_libelle'];?></legend>
        <?php if(!empty($_GET['e'])){echo error((int)$_GET['e']);}?>
-          <form action="update_script.php" method="post" id="modification_produit"  name="modification_produit"   onsubmit="return verifproduit();"> <!--balise form début du formulaire-->
+          <form action="update_script.php" method="POST" id="modification_produit"  name="modification_produit" > <!--balise form début du formulaire-->
           <fieldset>
              <input type="hidden" id="pro_id"  name="pro_id" value="<?php echo $row['pro_id'];?>"><!--  post de pro_id en input masqué -->
 
