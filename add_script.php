@@ -1,20 +1,7 @@
 <?php 
 include_once('db.php');
-$cat_id = $_POST['cat_id'];
-$pro_libelle = $_POST['pro_libelle'];    
-$pro_ref = $_POST['pro_ref'];    
-$pro_prix = $_POST['pro_prix'];      
-$pro_stock = $_POST['pro_stock'];
-$pro_couleur = $_POST['pro_couleur'];      
-$info = new SplFileInfo($_POST['pro_img']);
-$pro_photo = $info->getExtension(); 
-$pro_description = $_POST['pro_description'];  
-$pro_d_ajout = date("Y-m-d H:i:s");   
-
 //on vérifie les valeurs entré le nombre de caractére et pour les valeur numérique aussi exemple pro_stock, pro_prix etc
-
-if(
-is_numeric($_POST['pro_prix'])&&!empty($_POST['cat_id'])
+if(is_numeric($_POST['pro_prix'])&&!empty($_POST['cat_id'])
 &&!empty($_POST['pro_libelle'])&&strlen($_POST['pro_libelle'])<=200
 &&!empty($_POST['pro_ref'])&&strlen($_POST['pro_ref'])<=10
 &&!empty($_POST['pro_stock'])&&strlen($_POST['pro_stock'])<=200
@@ -66,8 +53,11 @@ is_numeric($_POST['pro_prix'])&&!empty($_POST['cat_id'])
         {
         header("Location: index.php");// si ya bien requéte on fait la redirection sur le produit
         exit();
-    }else{
+        }
+        else
+        {
         header("Location: add_form.php?e=2");// si ya une erreur on renvoi avec le get e numéro 1
+        exit();
         }
       
 

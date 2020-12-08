@@ -51,5 +51,14 @@
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
 }
-.counter span{color:green}
-.counter span.warning{color:red}
+.counter span{
+    color:green;
+}
+.counter span.warning{
+    color:red;
+}
+
+.bloque {
+    color:white;
+    background-color: red;
+}

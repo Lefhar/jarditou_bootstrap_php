@@ -54,13 +54,16 @@ include_once('db.php');
                 
             <thead class="thead-light">
               <tr>
-              <th  scope="col">Photo</th><!--titre colonne 1-->
-              <th scope="col" >Id</th><!--colonne 2-->
-              <th scope="col">Catégorie</th><!--titre colonne 3-->
-              <th scope="col">Ref</th><!--titre colonne 4-->
-              <th scope="col">Libellé</th><!--titre colonne 5-->
-              <th scope="col">Prix</th><!--titre colonne 6-->
+              <th  scope="col">Photos</th><!--titre colonne 1-->
+              <th scope="col" >ID</th><!--colonne 2-->
+              <th scope="col">Référence</th><!--titre colonne 3-->
+              <th scope="col">Libellé</th><!--titre colonne 4-->
+              <th scope="col">Prix</th><!--titre colonne 5-->
+              <th scope="col">Stock</th><!--titre colonne 6-->
               <th scope="col">Couleur</th><!--titre colonne 7-->
+              <th scope="col">Ajout</th><!--titre colonne 8-->
+              <th scope="col">Modif</th><!--titre colonne 9-->
+              <th scope="col">Bloqué</th><!--titre colonne 9-->
             </tr>
             </thead>
             <tbody>
@@ -85,25 +88,29 @@ elseif(!empty($_GET['prix'])&&$_GET['prix'] =='desc')
 }
 else
 {
-  $order = "order by pro_libelle asc";
+  $order = "order by pro_id asc";
 }
     
 
-    $query = $db->prepare('SELECT pro_id, cat_nom , pro_libelle, pro_prix, pro_couleur, pro_photo, pro_ref FROM produits join categories on cat_id = pro_cat_id WHERE pro_stock > :pro_stock '.$order);
+    $query = $db->prepare('SELECT pro_id, cat_nom , pro_libelle, pro_prix, pro_couleur, pro_photo, pro_ref, pro_stock, pro_d_ajout, pro_d_modif, pro_bloque  FROM produits join categories on cat_id = pro_cat_id WHERE pro_stock > :pro_stock '.$order);
     $zero = 0;
     $query->bindParam(':pro_stock', $zero); //paramètre 
     $query->execute();//execution
     while ($row = $query->fetch(PDO::FETCH_ASSOC)) //notre boucle while pour afficher tout les produits
     {
-
+      $bloque ="";
+if($row['pro_bloque']){$bloque ='<span class="bloque">bloqué</span>';}
        echo '<tr  class="table-striped-warning">
               <td ><img width="100" src="src/img/'.$row['pro_id'].'.'.$row['pro_photo'].'" alt="'.$row['cat_nom'].' '.$row['pro_libelle'].'"  title="'.$row['cat_nom'].' '.$row['pro_libelle'].'" class="img-fluid" /></td>
               <td>'.$row['pro_id'].'</td>
-              <td>'.$row['cat_nom'].'</td>
               <td>'.$row['pro_ref'].'</td>
               <td><a href="detail.php?pro_id='.$row['pro_id'].'" title="détail" alt="détail">'.$row['pro_libelle'].'</a></td>
               <td>'.$row['pro_prix'].'&euro;</td>
+              <td>'.$row['pro_stock'].'</td>
               <td>'.$row['pro_couleur'].'</td>
+              <td>'.$row['pro_d_ajout'].'</td>
+              <td>'.$row['pro_d_modif'].'</td>
+              <td>'.$bloque.'</td>
             </tr>';
 
     }
