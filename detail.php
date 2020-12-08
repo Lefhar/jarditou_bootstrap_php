@@ -53,15 +53,17 @@ include('header.php');?>
 </div>
 
      <?php }elseif(!empty($_GET['del'])&&$_GET['del']==1){?>
-        <div class="card m-4" >
-    <img  class="img-fluid" width="160" src="src/img/<?php echo $row['pro_id'];?>.<?php echo $row['pro_photo'];?>" alt="<?php echo ''.$row['cat_nom'].' '.$row['pro_libelle'].' '.$row['pro_couleur'].'';?>" title="<?php echo ''.$row['cat_nom'].' '.$row['pro_libelle'].' '.$row['pro_couleur'].'';?>">
-    <div class="card-body">
-    <h1 class="card-title">Etes vous sûr de vouloir supprimer <?php echo ''.$row['cat_nom'].' '.$row['pro_libelle'].' '.$row['pro_couleur'].'';?> de la base de données ?</h1>
-        <form action="delete_form.php" method="POST">
-            <input id="del" name="del" type="hidden" value="1">
-            <input id="confirm" name="confirm" type="hidden" value="1">
-            <input id="pro_id" name="pro_id" type="hidden" value="<?php echo $row['pro_id'];?>">
-            <button class="btn btn-danger">Supprimer</button>  <a href="index.php" class="btn btn-success">Annuler</a> 
+
+        <!-- formulaire de suppréssion du produit si get del ==1 -->
+    <div class="card m-4" >
+        <img  class="img-fluid" width="160" src="src/img/<?php echo $row['pro_id'];?>.<?php echo $row['pro_photo'];?>" alt="<?php echo ''.$row['cat_nom'].' '.$row['pro_libelle'].' '.$row['pro_couleur'].'';?>" title="<?php echo ''.$row['cat_nom'].' '.$row['pro_libelle'].' '.$row['pro_couleur'].'';?>">
+     <div class="card-body">
+        <h1 class="card-title">Etes vous sûr de vouloir supprimer <?php echo ''.$row['cat_nom'].' '.$row['pro_libelle'].' '.$row['pro_couleur'].'';?> de la base de données ?</h1>
+            <form action="delete_form.php" method="POST">
+                <input id="del" name="del" type="hidden" value="1">
+                <input id="confirm" name="confirm" type="hidden" value="1">
+                <input id="pro_id" name="pro_id" type="hidden" value="<?php echo $row['pro_id'];?>">
+                <button class="btn btn-danger">Supprimer</button>  <a href="index.php" class="btn btn-success">Annuler</a> 
             </form>
    </div>
 </div>
