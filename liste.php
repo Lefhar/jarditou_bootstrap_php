@@ -98,6 +98,7 @@ else
     {
       $bloque ="";
 if($row['pro_bloque']){$bloque ='<span class="bloque">bloqué</span>';}
+
        echo '<tr  class="table-striped-warning">
               <td ><img width="100" src="src/img/'.$row['pro_id'].'.'.$row['pro_photo'].'" alt="'.$row['cat_nom'].' '.$row['pro_libelle'].'"  title="'.$row['cat_nom'].' '.$row['pro_libelle'].'" class="img-fluid" /></td>
               <td>'.$row['pro_id'].'</td>
