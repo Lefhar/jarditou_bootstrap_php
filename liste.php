@@ -92,9 +92,7 @@ else
 }
     
 
-    $query = $db->prepare('SELECT pro_id, cat_nom , pro_libelle, pro_prix, pro_couleur, pro_photo, pro_ref, pro_stock, pro_d_ajout, pro_d_modif, pro_bloque  FROM produits join categories on cat_id = pro_cat_id WHERE pro_stock > :pro_stock '.$order);
-    $zero = 0;
-    $query->bindParam(':pro_stock', $zero); //paramètre 
+    $query = $db->prepare('SELECT pro_id, cat_nom , pro_libelle, pro_prix, pro_couleur, pro_photo, pro_ref, pro_stock, pro_d_ajout, pro_d_modif, pro_bloque  FROM produits join categories on cat_id = pro_cat_id '.$order);
     $query->execute();//execution
     while ($row = $query->fetch(PDO::FETCH_ASSOC)) //notre boucle while pour afficher tout les produits
     {
