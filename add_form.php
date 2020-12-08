@@ -23,7 +23,7 @@ include('header.php');?>
                 <article>
             
        <legend> Formulaire d'ajout d'un produit </legend>
-       
+       <?php if(!empty($_GET['e'])){echo error((int)$_GET['e']);}?>
      <form action="add_script.php" method="POST" id="ajout_produit"  name="ajout_produit"  > <!--balise form début du formulaire-->
         <fieldset>
 

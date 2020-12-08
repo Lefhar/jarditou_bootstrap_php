@@ -63,6 +63,10 @@ is_numeric($_POST['cat_id']))
         header("Location: index.php");// si ya bien requéte on fait la redirection sur le produit
         exit();
         }
+        else
+        {
+        header("Location: update_form.php?pro_id=".$row['pro_id']."&e=1");// si ya une erreur on renvoi avec le get e numéro 1
+        }
       
 
       }  

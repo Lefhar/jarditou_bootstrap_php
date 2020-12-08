@@ -1,7 +1,8 @@
 <?php 
-var_dump($_POST);
+include_once('db.php');
 $cat_id = $_POST['cat_id'];
-$pro_libelle = $_POST['pro_libelle'];      
+$pro_libelle = $_POST['pro_libelle'];    
+$pro_ref = $_POST['pro_ref'];    
 $pro_prix = $_POST['pro_prix'];      
 $pro_stock = $_POST['pro_stock'];
 $pro_couleur = $_POST['pro_couleur'];      
@@ -11,24 +12,34 @@ $pro_description = $_POST['pro_description'];
 $pro_d_ajout = date("Y-m-d H:i:s");   
 
 //on vérifie les valeurs entré le nombre de caractére et pour les valeur numérique aussi exemple pro_stock, pro_prix etc
-if(!empty($_POST['pro_libelle'])&&strlen($_POST['pro_libelle'])<=200&&!empty($_POST['pro_stock'])&&strlen($_POST['pro_stock'])<=200
-&&!empty($_POST['pro_couleur'])&&strlen($_POST['pro_couleur'])<=30&&!empty($_POST['pro_description'])&&strlen($_POST['pro_description'])<=1000&&
-!empty($_POST['pro_img'])&&!empty($_POST['pro_prix'])&&is_numeric($_POST['pro_prix'])&&!empty($_POST['cat_id'])&&
-is_numeric($_POST['cat_id']))
+
+if(
+is_numeric($_POST['pro_prix'])&&!empty($_POST['cat_id'])
+&&!empty($_POST['pro_libelle'])&&strlen($_POST['pro_libelle'])<=200
+&&!empty($_POST['pro_ref'])&&strlen($_POST['pro_ref'])<=10
+&&!empty($_POST['pro_stock'])&&strlen($_POST['pro_stock'])<=200
+&&!empty($_POST['pro_couleur'])&&strlen($_POST['pro_couleur'])<=30
+&&!empty($_POST['pro_description'])&&strlen($_POST['pro_description'])<=1000
+&&!empty($_POST['pro_img'])
+&&!empty($_POST['pro_prix'])&&is_numeric($_POST['pro_prix'])
+&&!empty($_POST['cat_id'])&&is_numeric($_POST['cat_id']))
 {
+  
 
     try 
     {
 
       //requete sql
-      $sql = 'INSERT INTO produits (pro_cat_id, pro_libelle, pro_prix, pro_stock, pro_couleur, pro_photo, pro_description, pro_d_ajout) :pro_cat_id, :pro_libelle, :pro_prix, :pro_stock, :pro_couleur, :pro_photo, :pro_description, :pro_d_ajout';
+      $sql = 'INSERT INTO produits 
+      (pro_cat_id, pro_libelle, pro_ref, pro_prix, pro_stock, pro_couleur, pro_photo, pro_description, pro_d_ajout)  VALUES 
+       (:pro_cat_id, :pro_libelle, :pro_ref, :pro_prix, :pro_stock, :pro_couleur, :pro_photo, :pro_description, :pro_d_ajout)';
     
       $query = $db->prepare($sql);//on prepare
 
       //on récupére les divers champs
-          $id = $row['pro_id'];
           $cat_id = $_POST['cat_id'];
           $pro_libelle = $_POST['pro_libelle'];      
+          $pro_ref = $_POST['pro_ref'];      
           $pro_prix = $_POST['pro_prix'];      
           $pro_stock = $_POST['pro_stock'];
           $pro_couleur = $_POST['pro_couleur'];      
@@ -38,15 +49,15 @@ is_numeric($_POST['cat_id']))
           $pro_d_modif = date("Y-m-d H:i:s");     
 
         // Association des valeurs aux paramètres avec BindValue :
-        $query->bindValue(":pro_cat_id", $cat_id);
-        $query->bindValue(":pro_libelle", $pro_libelle);
-        $query->bindValue(":pro_prix", $pro_prix);
-        $query->bindValue(":pro_stock",$pro_stock);
-        $query->bindValue(":pro_couleur", $pro_couleur);
-        $query->bindValue(":pro_photo", $pro_photo);
-        $query->bindValue(":pro_description", $pro_description);
-        $query->bindValue(":pro_d_ajout", $pro_d_modif);
-        $query->bindValue(":pro_id", $id);
+        $query->bindParam(":pro_cat_id", $cat_id);
+        $query->bindParam(":pro_libelle", $pro_libelle);
+        $query->bindParam(":pro_ref", $pro_ref);
+        $query->bindParam(":pro_prix", $pro_prix);
+        $query->bindParam(":pro_stock",$pro_stock);
+        $query->bindParam(":pro_couleur", $pro_couleur);
+        $query->bindParam(":pro_photo", $pro_photo);
+        $query->bindParam(":pro_description", $pro_description);
+        $query->bindParam(":pro_d_ajout", $pro_d_modif);
 
         $success= $query->execute();//Exécution de la requête 
         $query->closeCursor();//on libére la mémoire
@@ -55,6 +66,8 @@ is_numeric($_POST['cat_id']))
         {
         header("Location: index.php");// si ya bien requéte on fait la redirection sur le produit
         exit();
+    }else{
+        header("Location: add_form.php?e=2");// si ya une erreur on renvoi avec le get e numéro 1
         }
       
 
@@ -71,5 +84,6 @@ is_numeric($_POST['cat_id']))
 
 }else{
   header("Location: add_form.php?e=2");// si ya une erreur on renvoi avec le get e numéro 1
+  exit();
 }
 ?>

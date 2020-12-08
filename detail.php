@@ -5,7 +5,7 @@
     <?php 
     include_once('db.php');
     $pro_id = $_GET['pro_id'];
-    $query = $db->prepare("SELECT pro_id, cat_nom , cat_id, pro_libelle, pro_prix, pro_couleur, pro_photo, pro_description, pro_bloque, pro_stock FROM produits join categories on cat_id = pro_cat_id WHERE pro_id = :pro_id ORDER BY pro_libelle");
+    $query = $db->prepare("SELECT pro_id, cat_nom , cat_id, pro_libelle, pro_prix, pro_couleur, pro_photo, pro_description, pro_bloque, pro_stock, pro_ref, pro_d_ajout FROM produits join categories on cat_id = pro_cat_id WHERE pro_id = :pro_id ORDER BY pro_libelle");
     $query->bindParam(":pro_id", $pro_id);
     $query->execute();
     $row = $query->fetch(PDO::FETCH_ASSOC);
@@ -44,7 +44,10 @@ include('header.php');?>
     <p class="card-text"><?php echo $row['pro_description'];?></p>
     <p class="card-text">Prix : <?php echo $row['pro_prix'];?>&euro;</p>
     <p class="card-text">Stock : <?php echo $stock;?> Produit disponible</p>
-    <a href="update_form.php?pro_id=<?php echo $row['pro_id'];?>" class="btn btn-primary">Modifier</a>
+    <p class="card-text">Référence : <?php echo $row['pro_ref']?></p>
+    <p class="card-text">catégorie : <?php echo $row['cat_nom']?></p>
+    <p class="card-text">Ajouté le : <?php echo $row['pro_d_ajout']?></p>
+    <a href="update_form.php?pro_id=<?php echo $row['pro_id'];?>" class="btn btn-primary">Modifier</a>   <a href="delete_form.php?pro_id=<?php echo $row['pro_id'];?>"  onclick="return confirm_delete();" class="btn btn-danger">Supprimer le produit</a>
     <?php $query->closeCursor(); ?>
   </div>
 </div>

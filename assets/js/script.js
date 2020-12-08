@@ -253,3 +253,16 @@ document.addEventListener('DOMContentLoaded',function(){
     }
   }
 });
+function confirm_delete()
+{
+			if(confirm("Voulez vous vraiment supprimer ce produit ?"))
+			{
+return true;
+			}
+			else
+			{
+                document.location.href='index.php';
+return false;
+
+			}
+		}
