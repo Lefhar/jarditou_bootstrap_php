@@ -50,16 +50,31 @@ include('header.php');?>
         <div class="form-group row">
         <label for="pro_ref" class="col-sm-2 col-form-label col-12">Référence :</label>
         <div class="col-sm-10 col-12"> 
-        <input type="text" class="form-control" id="pro_ref"  name="pro_ref"  data-maxlength="10" value="<?php echo $row['pro_ref'];?>"> <br>
+        <input type="text" class="form-control is-valid" id="pro_ref"  name="pro_ref"  data-maxlength="10" value="<?php echo $row['pro_ref'];?>"> <br>
         <div id="pro_refError" class="counter"><span>0</span> caractères (10 max)</div> 
         </div>
         </div>   
 
-        
         <div class="form-group row">
-        <label for="pro_libelle" class="col-sm-2 col-form-label col-12">Libelle :</label>
+        <label for="cat_id" class="col-sm-2 col-form-label" >Catégorie  </label>
         <div class="col-sm-10 col-12"> 
-        <input type="text" class="form-control" id="pro_libelle"  name="pro_libelle"  data-maxlength="200" value="<?php echo $row['pro_libelle'];?>"> <br>
+        <select name="cat_id" id="cat_id" class="form-control is-valid">
+        <?php   $query2 = $db->prepare('SELECT cat_nom, cat_id  FROM  categories WHERE   cat_id != :cat_id ORDER BY cat_nom asc');
+                $query2->execute(array('cat_id' => $row['cat_id'] ));
+                echo '<option value="'.$row['cat_id'].'">'.$row['cat_nom'].'</option>' ;
+                while ($cat = $query2->fetch(PDO::FETCH_ASSOC)) 
+                {
+                echo '<option value="'.$cat['cat_id'].'">'.$cat['cat_nom'].'</option>' ;
+                $query2->closeCursor();//on libére la mémoire
+                }?>
+        </select><br>
+        </div>
+          </div>
+           
+        <div class="form-group row">
+        <label for="pro_libelle" class="col-sm-2 col-form-label col-12">Libellé :</label>
+        <div class="col-sm-10 col-12"> 
+        <input type="text" class="form-control is-valid" id="pro_libelle"  name="pro_libelle"  data-maxlength="200" value="<?php echo $row['pro_libelle'];?>"> <br>
         <div id="pro_libelleError" class="counter"><span>0</span> caractères (200 max)</div> 
         </div>
         </div>   
@@ -67,7 +82,7 @@ include('header.php');?>
         <div class="form-group row">
         <label for="pro_couleur" class="col-sm-2 col-form-label col-12">Couleur :</label>
         <div class="col-sm-10 col-12"> 
-        <input type="text" class="form-control" id="pro_couleur"  name="pro_couleur"   data-maxlength="30" value="<?php echo $row['pro_couleur'];?>"> <br>
+        <input type="text" class="form-control is-valid" id="pro_couleur"  name="pro_couleur"   data-maxlength="30" value="<?php echo $row['pro_couleur'];?>"> <br>
         <div id="pro_couleurError" class="counter"><span>0</span> caractères (30 max)</div> 
         </div>
         </div>  
@@ -75,7 +90,7 @@ include('header.php');?>
         <div class="form-group row">
         <label for="pro_img" class="col-sm-2 col-form-label col-12">Extension de la photo :</label>
         <div class="col-sm-10 col-12"> 
-        <input type="text" class="form-control" id="pro_img"  name="pro_img"  value="<?php echo $row['pro_photo'];?>"> <br>
+        <input type="text" class="form-control is-valid" id="pro_img"  name="pro_img"  value="<?php echo $row['pro_photo'];?>"> <br>
         </div>
         </div>   
 
@@ -83,14 +98,14 @@ include('header.php');?>
         <div class="form-group row">
         <label for="pro_prix" class="col-sm-2 col-form-label col-12">Prix :</label>
         <div class="col-sm-10 col-12"> 
-        <input  type="number"  step="any" class="form-control" id="pro_prix"  name="pro_prix"  value="<?php echo $row['pro_prix'];?>"> <br>
+        <input  type="number"  step="any" class="form-control is-valid" id="pro_prix"  name="pro_prix"  value="<?php echo $row['pro_prix'];?>"> <br>
         </div>
         </div>   
 
         <div class="form-group row">
         <label for="pro_stock" class="col-sm-2 col-form-label col-12">Stock :</label>
         <div class="col-sm-10 col-12"> 
-        <input  type="number" class="form-control" id="pro_stock"  name="pro_stock"  value="<?php echo $row['pro_stock'];?>"> <br>
+        <input  type="number" class="form-control is-valid" id="pro_stock"  name="pro_stock"  value="<?php echo $row['pro_stock'];?>"> <br>
         </div>
         </div>   
 
@@ -107,24 +122,6 @@ include('header.php');?>
         </div>
         </div>
 
-
-         <div class="form-group row">
-         <label for="cat_id" class="col-sm-2 col-form-label" >Catégorie  </label>
-         <div class="col-sm-10 col-12"> 
-          <select name="cat_id" id="cat_id" class="form-control">
-        <?php     $query2 = $db->prepare('SELECT cat_nom, cat_id  FROM  categories WHERE   cat_id != :cat_id ORDER BY cat_nom asc');
-    $query2->execute(array('cat_id' => $row['cat_id'] ));
-
-    echo '<option value="'.$row['cat_id'].'">'.$row['cat_nom'].'</option>' ;
-    while ($cat = $query2->fetch(PDO::FETCH_ASSOC)) {
-     echo '<option value="'.$cat['cat_id'].'">'.$cat['cat_nom'].'</option>' ;
-    }
-    $query2->closeCursor();//on libére la mémoire
-    ?></select><br>
-    </div>
-             
-             </div>
-           
         <div class="form-group row">
         <label for="pro_description" class="col-sm-2 col-form-label" >Description produit  </label>
         <div class="col-sm-10 col-12"> 
@@ -132,13 +129,6 @@ include('header.php');?>
         <div id="pro_descriptionError" class="counter"><span>0</span> caractères (1000 max)</div> 
         </div>
         </div>
-
-        <div class="form-group row">
-        <label for="pro_stock" class="col-sm-2 col-form-label col-12">Stock :</label>
-        <div class="col-sm-10 col-12"> 
-        <input  type="number" class="form-control" id="pro_stock"  name="pro_stock"  value="<?php echo $row['pro_stock'];?>"> <br>
-        </div>
-        </div>   
 
         <div class="form-group row">
         <label for="pro_d_ajout" class="col-sm-2 col-form-label col-12">Date d'ajout :</label>
